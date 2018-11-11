@@ -1,0 +1,146 @@
+[
+    {
+        "id": "c23bf9f8.4c6888",
+        "type": "debug",
+        "z": "c9ea223b.c63b98",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 750,
+        "y": 165,
+        "wires": []
+    },
+    {
+        "id": "bc6b50b1.2c3fc8",
+        "type": "inject",
+        "z": "c9ea223b.c63b98",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 135,
+        "y": 165,
+        "wires": [
+            [
+                "47aaa14c.43327"
+            ]
+        ]
+    },
+    {
+        "id": "3f56052.d9b937a",
+        "type": "change",
+        "z": "c9ea223b.c63b98",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 449,
+        "y": 165,
+        "wires": [
+            [
+                "cb4acc7e.462ed"
+            ]
+        ]
+    },
+    {
+        "id": "47aaa14c.43327",
+        "type": "dir2files",
+        "z": "c9ea223b.c63b98",
+        "dirname": "",
+        "pathRegex": "",
+        "isRecursive": false,
+        "isArray": false,
+        "x": 278,
+        "y": 165,
+        "wires": [
+            [
+                "3f56052.d9b937a"
+            ]
+        ]
+    },
+    {
+        "id": "cb4acc7e.462ed",
+        "type": "file in",
+        "z": "c9ea223b.c63b98",
+        "name": "",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 610,
+        "y": 165,
+        "wires": [
+            [
+                "c23bf9f8.4c6888"
+            ]
+        ]
+    },
+    {
+        "id": "92b2f926.0af4",
+        "type": "inject",
+        "z": "c9ea223b.c63b98",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 135,
+        "y": 75,
+        "wires": [
+            [
+                "dd1d50b8.cf1358"
+            ]
+        ]
+    },
+    {
+        "id": "dd1d50b8.cf1358",
+        "type": "dir2files",
+        "z": "c9ea223b.c63b98",
+        "dirname": "",
+        "pathRegex": ".*\\.json",
+        "isRecursive": false,
+        "isArray": true,
+        "x": 278,
+        "y": 75,
+        "wires": [
+            [
+                "86b7e72b.2237"
+            ]
+        ]
+    },
+    {
+        "id": "86b7e72b.2237",
+        "type": "debug",
+        "z": "c9ea223b.c63b98",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 430,
+        "y": 75,
+        "wires": []
+    }
+]

@@ -1,0 +1,77 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dir2files', {
+        category: 'storage',
+        color: '#ad9069',
+        defaults: {
+            dirname: {
+                value: ''
+            },
+            pathRegex: {
+                value: ''
+            },
+            isRecursive: {
+                value: false
+            },
+            isArray: {
+                value: false
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'file.png',
+        label: function() {
+            return this.name || 'dir2files';
+        }
+    });
+
+</script>
+
+<script type="text/x-red" data-template-name="dir2files">
+    <div class="form-row">
+        <label for="node-input-dirname"><i class="fa fa-folder"></i> Direcoty</label>
+        <input type="text" id="node-input-dirname" placeholder="Directory Path">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pathRegex"><i class="fa fa-filter"></i> Path Regex</label>
+        <input type="text" id="node-input-pathRegex" placeholder="Regex">
+    </div>
+    <div class="form-row">
+        <label for="node-input-isRecursive"><i class="fa fa-repeat"></i> Recursive</label>
+        <input type="checkbox" id="node-input-isRecursive" value"true" style="width:auto" checked>
+    </div>
+    <div class="form-row">
+        <label for="node-input-isArray"><i class="fa fa-sign-out"></i> Output Array</label>
+        <input type="checkbox" id="node-input-isArray" value"true" style="width:auto">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="dir2files">
+    <p></p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">dirname <span class="property-type">string</span></dt>
+        <dd>Top directoryname to start searching files. If not set in the node configuration, set the current directoryname.</dd>
+        <dt class="optional">pathRegex <span class="property-type">string</span></dt>
+        <dd>Filepath regex to filtering files.</dd>
+        <dt class="optional">isRecursive <span class="property-type">boolean</span></dt>
+        <dd>Search files from the directory recursively or not. Default is false.</dd>
+        <dt class="optional">isArray <span class="property-type">boolean</span></dt>
+        <dd>If true, output is filenames' array. If false, output is filename's string repeatedly. Default is false.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string | array</span></dt>
+        <dd>if isArray property is true, output is filenames' array. if false, output is each filename's string repeatedly.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>If you want to list filenames under the directory, you set the directoryname. Moreover, you can select searching recursively or not, filter filenames by regex and select output type.</p>
+    <h3>References</h3>
+    <ul>
+        <li><a href="" target="_blank">GitHub</a> - the nodes github repository.</li>
+    </ul>
+</script>
