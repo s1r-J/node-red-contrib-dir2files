@@ -20,6 +20,8 @@ You can import the example flow from examples/example.json to your Node-RED.
 
 ## Install
 
+[npm](https://www.npmjs.com/package/node-red-contrib-dir2files)
+
 ## Licence
 
 [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
