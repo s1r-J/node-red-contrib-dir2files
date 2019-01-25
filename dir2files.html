@@ -12,6 +12,9 @@
             isRecursive: {
                 value: false
             },
+            findDir: {
+                value: false
+            },
             isArray: {
                 value: false
             }
@@ -28,8 +31,8 @@
 
 <script type="text/x-red" data-template-name="dir2files">
     <div class="form-row">
-        <label for="node-input-dirname"><i class="fa fa-folder"></i> Direcoty</label>
-        <input type="text" id="node-input-dirname" placeholder="Directory Path">
+        <label for="node-input-dirname"><i class="fa fa-folder"></i> Directory</label>
+        <input type="text" id="node-input-dirname" placeholder="Top Directory Path">
     </div>
     <div class="form-row">
         <label for="node-input-pathRegex"><i class="fa fa-filter"></i> Path Regex</label>
@@ -37,11 +40,15 @@
     </div>
     <div class="form-row">
         <label for="node-input-isRecursive"><i class="fa fa-repeat"></i> Recursive</label>
-        <input type="checkbox" id="node-input-isRecursive" value"true" style="width:auto" checked>
+        <input type="checkbox" id="node-input-isRecursive" style="width:auto">
+    </div>
+    <div class="form-row">
+        <label for="node-input-findDir"><i class="fa fa-folder"></i> Find Directories</label>
+        <input type="checkbox" id="node-input-findDir" style="width:auto">
     </div>
     <div class="form-row">
         <label for="node-input-isArray"><i class="fa fa-sign-out"></i> Output Array</label>
-        <input type="checkbox" id="node-input-isArray" value"true" style="width:auto">
+        <input type="checkbox" id="node-input-isArray" style="width:auto">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -60,13 +67,15 @@
         <dd>Filepath regex to filtering files.</dd>
         <dt class="optional">isRecursive <span class="property-type">boolean</span></dt>
         <dd>Search files from the directory recursively or not. Default is false.</dd>
+        <dt class="optional">findDir <span class="property-type">boolean</span></dt>
+        <dd>If true, search directories instead of files. Default is false.</dd>
         <dt class="optional">isArray <span class="property-type">boolean</span></dt>
-        <dd>If true, output is filenames' array. If false, output is filename's string repeatedly. Default is false.</dd>
+        <dd>If true, output is filename's array. If false, output is filename's string repeatedly. Default is false.</dd>
     </dl>
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload <span class="property-type">string | array</span></dt>
-        <dd>if isArray property is true, output is filenames' array. if false, output is each filename's string repeatedly.</dd>
+        <dd>if isArray property is true, output is filename's array. if false, output is each filename's string repeatedly.</dd>
     </dl>
     <h3>Details</h3>
     <p>If you want to list filenames under the directory, you set the directoryname. Moreover, you can select searching recursively or not, filter filenames by regex and select output type.</p>

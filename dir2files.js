@@ -14,6 +14,10 @@ module.exports = function (RED) {
             if (!(msg.isRecursive === null || msg.isRecursive === void 0)) {
                 isRecursive = msg.isRecursive;
             }
+            let findDir = config.findDir;
+            if (!(msg.findDir === null || msg.findDir === void 0)) {
+                findDir = msg.findDir;
+            }
             let isArray = config.isArray;
             if (!(msg.isArray === null || msg.isArray === void 0)) {
                 isArray = msg.isArray;
@@ -26,10 +30,16 @@ module.exports = function (RED) {
                     return PATH.join(dirname, itemname);
                 });
                 items.forEach((itempath) => {
-                    if (FS.statSync(itempath).isFile() && regex.test(itempath)) {
+                    if (FS.statSync(itempath).isFile() && !findDir && regex.test(itempath)) {
                         filenames.push(itempath);
-                    } else if (FS.statSync(itempath).isDirectory() && isRecursive) {
-                        readTopDirSync(itempath);
+                    }
+                    if (FS.statSync(itempath).isDirectory()) {
+                        if (findDir && regex.test(itempath)) {
+                            filenames.push(itempath);
+                        }
+                        if (isRecursive) {
+                            readTopDirSync(itempath);
+                        }
                     }
                 });
             });
