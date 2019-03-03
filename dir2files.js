@@ -8,6 +8,12 @@ module.exports = function (RED) {
         var node = this;
         node.on('input', function (msg) {
 
+            node.status({
+                fill: "blue",
+                shape: "dot",
+                text: "searching"
+            });
+
             const dirname = config.dirname || msg.dirname || './';
             const regex = new RegExp(config.pathRegex || msg.pathRegex || '.*');
             let isRecursive = config.isRecursive;
@@ -24,26 +30,30 @@ module.exports = function (RED) {
             }
 
             let filenames = [];
-            const readTopDirSync = ((dirname) => {
-                let items = FS.readdirSync(dirname);
-                items = items.map((itemname) => {
-                    return PATH.join(dirname, itemname);
-                });
-                items.forEach((itempath) => {
-                    if (FS.statSync(itempath).isFile() && !findDir && regex.test(itempath)) {
-                        filenames.push(itempath);
-                    }
-                    if (FS.statSync(itempath).isDirectory()) {
-                        if (findDir && regex.test(itempath)) {
+            const readTopDirSync = ((dirname, msg) => {
+                try {
+                    let items = FS.readdirSync(dirname);
+                    items = items.map((itemname) => {
+                        return PATH.join(dirname, itemname);
+                    });
+                    items.forEach((itempath) => {
+                        if (FS.statSync(itempath).isFile() && !findDir && regex.test(itempath)) {
                             filenames.push(itempath);
                         }
-                        if (isRecursive) {
-                            readTopDirSync(itempath);
+                        if (FS.statSync(itempath).isDirectory()) {
+                            if (findDir && regex.test(itempath)) {
+                                filenames.push(itempath);
+                            }
+                            if (isRecursive) {
+                                readTopDirSync(itempath);
+                            }
                         }
-                    }
-                });
+                    });
+                } catch (err) {
+                    node.error(err.message, msg);
+                }
             });
-            readTopDirSync(dirname);
+            readTopDirSync(dirname, msg);
 
             if (isArray) {
                 msg.payload = filenames;
@@ -58,6 +68,9 @@ module.exports = function (RED) {
                 msg.payload = (filenames[lastIndex] === void 0 ? '' : filenames[lastIndex]);
                 node.send(msg);
             }
+
+            node.status({});
+
         });
     }
 

@@ -1,3 +1,30 @@
+<script type="text/x-red" data-template-name="dir2files">
+    <div class="form-row">
+        <label for="node-input-dirname"><i class="fa fa-folder"></i> Directory</label>
+        <input type="text" id="node-input-dirname" placeholder="Top Directory Path">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pathRegex"><i class="fa fa-filter"></i> Path Regex</label>
+        <input type="text" id="node-input-pathRegex" placeholder="Regex">
+    </div>
+    <div class="form-row">
+        <label for="node-input-isRecursive"><i class="fa fa-repeat"></i> Recursive</label>
+        <input type="checkbox" id="node-input-isRecursive" style="width:auto">
+    </div>
+    <div class="form-row">
+        <label for="node-input-findDir"><i class="fa fa-folder"></i> Find Directories</label>
+        <input type="checkbox" id="node-input-findDir" style="width:auto">
+    </div>
+    <div class="form-row">
+        <label for="node-input-isArray"><i class="fa fa-sign-out"></i> Output Array</label>
+        <input type="checkbox" id="node-input-isArray" style="width:auto">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
 <script type="text/javascript">
     RED.nodes.registerType('dir2files', {
         category: 'storage',
@@ -24,36 +51,14 @@
         icon: 'file.png',
         label: function() {
             return this.name || 'dir2files';
+        },
+        oneditprepare: function() {
+            $("#node-input-pathRegex").typedInput({
+                types: ['re']
+            });
         }
     });
 
-</script>
-
-<script type="text/x-red" data-template-name="dir2files">
-    <div class="form-row">
-        <label for="node-input-dirname"><i class="fa fa-folder"></i> Directory</label>
-        <input type="text" id="node-input-dirname" placeholder="Top Directory Path">
-    </div>
-    <div class="form-row">
-        <label for="node-input-pathRegex"><i class="fa fa-filter"></i> Path Regex</label>
-        <input type="text" id="node-input-pathRegex" placeholder="Regex">
-    </div>
-    <div class="form-row">
-        <label for="node-input-isRecursive"><i class="fa fa-repeat"></i> Recursive</label>
-        <input type="checkbox" id="node-input-isRecursive" style="width:auto">
-    </div>
-    <div class="form-row">
-        <label for="node-input-findDir"><i class="fa fa-folder"></i> Find Directories</label>
-        <input type="checkbox" id="node-input-findDir" style="width:auto">
-    </div>
-    <div class="form-row">
-        <label for="node-input-isArray"><i class="fa fa-sign-out"></i> Output Array</label>
-        <input type="checkbox" id="node-input-isArray" style="width:auto">
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
 </script>
 
 <script type="text/x-red" data-help-name="dir2files">
