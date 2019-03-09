@@ -1,7 +1,7 @@
 module.exports = function (RED) {
 
-    const FS = require('fs-extra');
-    const PATH = require('path');
+    const fs = require('fs-extra');
+    const path = require('path');
 
     function Dir2FilesNode(config) {
         RED.nodes.createNode(this, config);
@@ -25,15 +25,12 @@ module.exports = function (RED) {
 
             let filenames = [];
             const readTopDirSync = ((dirname) => {
-                let items = FS.readdirSync(dirname);
-                items = items.map((itemname) => {
-                    return PATH.join(dirname, itemname);
-                });
-                items.forEach((itempath) => {
-                    if (FS.statSync(itempath).isFile() && !findDir && regex.test(itempath)) {
+                let items = fs.readdirSync(dirname);
+                for (let item of items) {
+                    const itempath = path.join(dirname, item);
+                    if (!findDir && fs.statSync(itempath).isFile() && regex.test(itempath)) {
                         filenames.push(itempath);
-                    }
-                    if (FS.statSync(itempath).isDirectory()) {
+                    } else if (fs.statSync(itempath).isDirectory()) {
                         if (findDir && regex.test(itempath)) {
                             filenames.push(itempath);
                         }
@@ -41,9 +38,13 @@ module.exports = function (RED) {
                             readTopDirSync(itempath);
                         }
                     }
-                });
+                }
             });
-            readTopDirSync(dirname);
+            try {
+                readTopDirSync(dirname, msg, node);
+            } catch (err) {
+                node.error(err.message, msg);
+            }
 
             if (isArray) {
                 msg.payload = filenames;
@@ -58,6 +59,7 @@ module.exports = function (RED) {
                 msg.payload = (filenames[lastIndex] === void 0 ? '' : filenames[lastIndex]);
                 node.send(msg);
             }
+
         });
     }
 

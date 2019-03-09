@@ -1,34 +1,3 @@
-<script type="text/javascript">
-    RED.nodes.registerType('dir2files', {
-        category: 'storage',
-        color: '#ad9069',
-        defaults: {
-            dirname: {
-                value: ''
-            },
-            pathRegex: {
-                value: ''
-            },
-            isRecursive: {
-                value: false
-            },
-            findDir: {
-                value: false
-            },
-            isArray: {
-                value: false
-            }
-        },
-        inputs: 1,
-        outputs: 1,
-        icon: 'file.png',
-        label: function() {
-            return this.name || 'dir2files';
-        }
-    });
-
-</script>
-
 <script type="text/x-red" data-template-name="dir2files">
     <div class="form-row">
         <label for="node-input-dirname"><i class="fa fa-folder"></i> Directory</label>
@@ -56,8 +25,44 @@
     </div>
 </script>
 
+<script type="text/javascript">
+    RED.nodes.registerType('dir2files', {
+        category: 'storage',
+        color: '#ad9069',
+        defaults: {
+            dirname: {
+                value: ''
+            },
+            pathRegex: {
+                value: ''
+            },
+            isRecursive: {
+                value: false
+            },
+            findDir: {
+                value: false
+            },
+            isArray: {
+                value: false
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'file.png',
+        label: function() {
+            return this.name || 'dir2files';
+        },
+        oneditprepare: function() {
+            $("#node-input-pathRegex").typedInput({
+                types: ['re']
+            });
+        }
+    });
+
+</script>
+
 <script type="text/x-red" data-help-name="dir2files">
-    <p></p>
+    <p>Search files or directories in the specified directory and return paths which can be filtered by regex.</p>
 
     <h3>Inputs</h3>
     <dl class="message-properties">

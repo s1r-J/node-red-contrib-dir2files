@@ -1,7 +1,7 @@
 node-red-contrib-dir2files
 ====
 
-Node-RED node that searches files in a directory and return paths which can be filtered by regex.
+Node-RED node that searches files or directories in the specified directory and return paths which can be filtered by regex.
 
 ## Description
 
