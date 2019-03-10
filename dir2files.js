@@ -7,6 +7,11 @@ module.exports = function (RED) {
         RED.nodes.createNode(this, config);
         var node = this;
         node.on('input', function (msg) {
+            node.status({
+                fill: 'blue',
+                shape: 'dot',
+                text: 'searching'
+            });
 
             const dirname = config.dirname || msg.dirname || './';
             const regex = new RegExp(config.pathRegex || msg.pathRegex || '.*');
@@ -46,6 +51,7 @@ module.exports = function (RED) {
                 node.error(err.message, msg);
             }
 
+            node.status({});
             if (isArray) {
                 msg.payload = filenames;
                 node.send(msg);
@@ -60,6 +66,10 @@ module.exports = function (RED) {
                 node.send(msg);
             }
 
+        });
+
+        node.on('close', function () {
+            node.status({});
         });
     }
 
