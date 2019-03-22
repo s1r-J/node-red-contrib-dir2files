@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-dir2files",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Node-RED node that searches files in a directory and return paths which can be filtered by regex.",
     "main": "node.js",
     "scripts": {
