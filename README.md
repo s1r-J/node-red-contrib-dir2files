@@ -5,7 +5,7 @@ Node-RED node that searches files or directories in the specified directory and 
 
 ## Description
 
-fucntions
+functions
 
 - filter filenames by regex
 - search files recursively or not
