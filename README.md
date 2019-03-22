@@ -20,7 +20,7 @@ You can import the example flow from examples/example.json to your Node-RED.
 
 ## Install
 
-[npm](https://www.npmjs.com/package/node-red-contrib-dir2files)
+[![NPM](https://nodei.co/npm/node-red-contrib-dir2files.png)](https://nodei.co/npm/node-red-contrib-dir2files/)
 
 ## Licence
 
