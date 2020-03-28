@@ -35,7 +35,7 @@
     "devDependencies": {
         "eslint": "^5.15.0",
         "eslint-plugin-node": "^8.0.1",
-        "node-red": "^0.19.5",
+        "node-red": "^1.0.4",
         "node-red-node-test-helper": "^0.1.8",
         "should": "^13.2.3"
     }
