@@ -4,7 +4,6 @@
     "description": "Node-RED node that searches files in a directory and return paths which can be filtered by regex.",
     "main": "node.js",
     "scripts": {
-        "test": "mocha test/dir2files_spec.js",
         "lint": "eslint ./dir2files.js --fix"
     },
     "repository": {
@@ -35,8 +34,5 @@
     "devDependencies": {
         "eslint": "^5.15.0",
         "eslint-plugin-node": "^8.0.1",
-        "node-red": "^0.19.5",
-        "node-red-node-test-helper": "^0.1.8",
-        "should": "^13.2.3"
     }
 }
